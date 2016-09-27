@@ -6,13 +6,23 @@ const {connect} = require('./database')
 const routes = require('./routes/') //same as ./routes/index
 const session = require('express-session')
 const bodyParser = require('body-parser')
-// const RedisStore = require('connect-redis')(session)
+const RedisStore = require('connect-redis')(session)
 
 
 app.set('view engine', 'pug')
 
 
 app.set('port', process.env.PORT || 3333)
+
+
+
+app.use(session({
+  store: new RedisStore({
+    url: process.env.REDIS_URL || 'redis://localhost:6379'
+  }),
+  secret: 'ayeea'
+}))
+
 
 
 app.use(bodyParser.urlencoded({
