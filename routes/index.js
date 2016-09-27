@@ -11,14 +11,6 @@ router.get('/', (req, res) => {
   })
 })
 
-// router.post('/', (req,res) => {
-// 	if(logout) {
-// 		req.session.destroy(err => {
-//       if(err) throw err
-//       res.redirect('/login')
-//     })
-// 	}
-// })
 
 // ****************************************************************************
 // *                 ///////*******register********\\\\\\\\\\                 *
