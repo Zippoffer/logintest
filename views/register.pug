@@ -1,0 +1,25 @@
+extends partials/layout.pug
+
+block content
+	body
+
+
+			h1 REGISTER
+
+			
+
+
+			.registration-form
+				form(method="POST")
+					.form-group
+						label(for='email') Email Address
+						input.form-control#email(type='email',name = 'email', placeholder='you@example.com')
+					.form-group
+						label(for='password') Password
+						input.form-control#password(type='password',name = 'password', placeholder='*************')
+					.form-group
+						label(for='confirmation') Confirmation
+						input.form-control#confirmation(type='password',name = 'confirmation', placeholder='*******')
+					.password-form__submit
+						a.btn.btn-danger.btn-lg(href="/user") Cancel
+						input.btn.btn-success.btn-lg(type='submit' value='Submit')
