@@ -11,6 +11,14 @@ router.get('/', (req, res) => {
   })
 })
 
+// router.post('/', (req,res) => {
+// 	if(logout) {
+// 		req.session.destroy(err => {
+//       if(err) throw err
+//       res.redirect('/login')
+//     })
+// 	}
+// })
 
 // ****************************************************************************
 // *                 ///////*******register********\\\\\\\\\\                 *
@@ -47,31 +55,14 @@ router.get('/login', (req, res) => {
 })
 router.post('/login', ({session, body: {email,password}},res, err) => {
 	User.findOne({email, password})
-	.then(user => {
-      if (user) {
-        return new Promise((resolve, reject) => {
-          bcrypt.compare(password, user.password, (err, matches) => {
-            if (err) {
-              reject(err)
-            } else {
-              resolve(matches)
-            }
-          })
-        })
-      } else {
-        res.render('login', { msg: 'Email does not exist in our system' })
-      }
-    })
-.then((matches) => {
-      if (matches) {
-        session.email = email
-        res.redirect('/')
-      } else {
-        res.render('login', { msg: 'Password does not match' })
-      }
-    })
-    .catch(err)
+		.then(user => {
+			console.log(user)
+			if (user) {
+				res.render('index', {user})
+			}
+		})
 })
+
 // ****************************************************************************
 // *                   ////////******logout*******\\\\\\\\\\                  *
 // ****************************************************************************
@@ -81,8 +72,9 @@ router.get('/logout', (req, res) => {
 		title: 'logout'
 	})
 })
-router.post('/logout', ({session},req, res, next) => {
-  req.session.destroy(err => {
+router.post('/logout', ({session}, res, next) => {
+	console.log('hello')
+  session.destroy(err => {
     if (err) throw err
     res.redirect('/login')
   })
