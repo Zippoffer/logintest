@@ -45,9 +45,9 @@ router.get('/login', (req, res) => {
 		title: 'login'
 	})
 })
-router.post('/login', ({session, body: {email,password}},res, err) => {
-	User.findOne({email, password})
-		.then(user => {
+router.post('/login', ({session, body: {email,password}},res, err) => {		//session and body are destructured from req
+	User.findOne({email, password})																					//email and password are destructured from body
+		.then(user => {																												//lower-case 'user' is created here it carries email and password
 			console.log(user)
 			if (user) {
 				res.render('index', {user})
@@ -64,7 +64,7 @@ router.get('/logout', (req, res) => {
 		title: 'logout'
 	})
 })
-router.post('/logout', ({session}, res, next) => {
+router.post('/logout', ({session}, res, next) => {		//session is destructured from req
 	console.log('hello')
   session.destroy(err => {
     if (err) throw err
