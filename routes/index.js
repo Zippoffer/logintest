@@ -88,34 +88,18 @@ router.post('/login', ({session, body: { email, password } }, res, err) => {			/
 // *                   ////////******logout*******\\\\\\\\\\                  *
 // ****************************************************************************
 
-// router.get('/logout', (req, res) => {
-// 	res.render('logout', {
-// 		title: 'logout'
-// 	})
-// })
-// router.post('/logout', ({session}, res, next) => {		//session is destructured from req
-// 	console.log('hello')
-//   session.destroy(err => {
-//     if (err) throw err
-//     res.redirect('/login')
-//   })
-// })
-
-
 router.get('/logout', (req, res) => {
-   if (req.session.email) {
-     res.render('logout', { page: 'Logout'})
-   } else {
-     res.redirect('/login')
-   }
- })
- 
- router.post('/logout', (req, res) => {
-   req.session.destroy(err => {
-     if (err) throw err
-     res.redirect('/login')
-   })
- })
+	res.render('logout', {
+		title: 'logout'
+	})
+})
+router.post('/logout', ({session}, res, next) => {		//session is destructured from req
+  session.destroy(err => {
+    if (err) throw err
+    res.redirect('/login')
+  })
+})
+
  
 
 module.exports = router
